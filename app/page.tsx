@@ -3,8 +3,10 @@ import Image from "next/image";
 import logoApp from "@/public/logo.svg";
 import {Cursor, Typewriter} from "react-simple-typewriter";
 import ButtonProvider from "@/app/components/ButtonProvider";
+import {useSession} from "next-auth/react";
 
 export default function Home() {
+    const { data: session } = useSession();
 
     return (
         <section className="w-full h-screen flex justify-center items-center flex-col gap-2">

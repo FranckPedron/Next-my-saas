@@ -12,5 +12,13 @@ export default {
             clientId: process.env.AUTH_GOOGLE_ID,
             clientSecret: process.env.AUTH_GOOGLE_SECRET,
         })
-    ]
+    ],
+    callbacks: {
+        session: async ({session, user}) => {
+            if (session.user) {
+                session.user.id = user.id;
+            }
+            return session;
+        }
+    }
 } satisfies NextAuthConfig;
