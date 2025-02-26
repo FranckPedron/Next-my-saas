@@ -4,7 +4,8 @@ datasource db {
 }
 
 generator client {
-  provider = "db.ts-client-js"
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
 }
 
 model User {
