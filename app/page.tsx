@@ -4,10 +4,14 @@ import logoApp from "@/public/logo.svg";
 import {Cursor, Typewriter} from "react-simple-typewriter";
 import ButtonProvider from "@/app/components/ButtonProvider";
 import {useSession} from "next-auth/react";
+import {redirect} from "next/navigation";
 
 export default function Home() {
     const { data: session } = useSession();
 
+    if(session) {
+        redirect('/dashboard/notes');
+    }
     return (
         <section className="w-full h-screen flex justify-center items-center flex-col gap-2">
             <Image src={logoApp} alt="Logo application" width={100} height={100}
