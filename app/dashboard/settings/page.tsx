@@ -4,8 +4,11 @@ import { Input } from '@/components/ui/input';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import {getUser} from "@/lib/actionsUsers";
+import Image from "next/image";
 
 export default async function PageSettings() {
+    const user = await getUser();
     return (
         <section className="border border-gray-200 rounded-md p-3">
             <h2 className="text-3xl uppercase font-black">Settings</h2>
@@ -13,7 +16,7 @@ export default async function PageSettings() {
             <div className="w-12 bg-white my-2 mx-1 h-[1px]"></div>
 
             <form action="">
-                <Input type="hidden" name="id" value="1" />
+                <Input type="hidden" name="id" value={user?.id} />
 
                 <Card>
                     <CardHeader>
@@ -22,21 +25,24 @@ export default async function PageSettings() {
                     </CardHeader>
 
                     <CardContent>
+                        {user?.image && (
+                            <Image width={100} height={100} src={user?.image} alt={user?.name || "Photo de profil"} className="w-16 h-16 object-contain mb-4 rounded-full" />
+                        )}
                         <div className="space-y-1 mb-2">
                             <Label htmlFor="idUser">ID</Label>
-                            <Input type="text" name="idUser" id="idUser" disabled />
+                            <Input type="text" name="idUser" id="idUser" disabled defaultValue={user?.id || ''}/>
                         </div>
                         <div className="space-y-1 mb-2">
                             <Label htmlFor="name">Nom</Label>
-                            <Input type="text" name="name" id="name"/>
+                            <Input type="text" name="name" id="name" defaultValue={user?.name || ''}/>
                         </div>
                         <div className="space-y-1 mb-2">
                             <Label htmlFor="email">Email</Label>
-                            <Input type="email" name="email" id="email" disabled />
+                            <Input type="email" name="email" id="email" disabled defaultValue={user?.email || ''}/>
                         </div>
                     </CardContent>
                     <CardFooter>
-                        <Button type="submit" className="bg-orange-500 hover:bg-orange-600">Modifier</Button>
+                        <Button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white">Modifier</Button>
                     </CardFooter>
                 </Card>
             </form>
