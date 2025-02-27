@@ -1,32 +1,39 @@
-import React from 'react'
 
-import { Input } from '@/components/ui/input';
-import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import {getUser} from "@/lib/actionsUsers";
+
+import {Input} from '@/components/ui/input';
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@/components/ui/card';
+import {Label} from '@/components/ui/label';
+import {Button} from '@/components/ui/button';
+import {getUser, updateUser} from "@/lib/actionsUsers";
 import Image from "next/image";
+import {toast} from "react-toastify";
 
 export default async function PageSettings() {
     const user = await getUser();
+
+    const handleSubmit= () => {
+        toast.success("Profil mis à jour avec succès")
+    }
+
     return (
         <section className="border border-gray-200 rounded-md p-3">
             <h2 className="text-3xl uppercase font-black">Settings</h2>
             <p className="text-lg text-muted-foreground">Paramètres de profil</p>
             <div className="w-12 bg-white my-2 mx-1 h-[1px]"></div>
 
-            <form action="">
-                <Input type="hidden" name="id" value={user?.id} />
+            <form action={updateUser} onSubmit={handleSubmit}>
+                <Input type="hidden" name="id" value={user?.id}/>
 
                 <Card>
                     <CardHeader>
-                       <CardTitle>Parametres globaux</CardTitle>
-                       <CardDescription>Modifiez vos informations puis sauvegardez</CardDescription>
+                        <CardTitle>Parametres globaux</CardTitle>
+                        <CardDescription>Modifiez vos informations puis sauvegardez</CardDescription>
                     </CardHeader>
 
                     <CardContent>
                         {user?.image && (
-                            <Image width={100} height={100} src={user?.image} alt={user?.name || "Photo de profil"} className="w-16 h-16 object-contain mb-4 rounded-full" />
+                            <Image width={100} height={100} src={user?.image} alt={user?.name || "Photo de profil"}
+                                   className="w-16 h-16 object-contain mb-4 rounded-full"/>
                         )}
                         <div className="space-y-1 mb-2">
                             <Label htmlFor="idUser">ID</Label>
@@ -47,8 +54,9 @@ export default async function PageSettings() {
                 </Card>
             </form>
             <form action="">
-                <Input type="hidden" name="id" value="" />
-                <Button type="submit" className="bg-red-500 mx-1 my-1 hover:bg-red-600 text-white">Supprimer mon compte</Button>
+                <Input type="hidden" name="id" value=""/>
+                <Button type="submit" className="bg-red-500 mx-1 my-1 hover:bg-red-600 text-white">Supprimer mon
+                    compte</Button>
             </form>
         </section>
     )
