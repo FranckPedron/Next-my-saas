@@ -1,19 +1,12 @@
-
-
 import {Input} from '@/components/ui/input';
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@/components/ui/card';
 import {Label} from '@/components/ui/label';
 import {Button} from '@/components/ui/button';
 import {getUser, updateUser} from "@/lib/actionsUsers";
 import Image from "next/image";
-import {toast} from "react-toastify";
 
 export default async function PageSettings() {
     const user = await getUser();
-
-    const handleSubmit= () => {
-        toast.success("Profil mis à jour avec succès")
-    }
 
     return (
         <section className="border border-gray-200 rounded-md p-3">
@@ -21,7 +14,7 @@ export default async function PageSettings() {
             <p className="text-lg text-muted-foreground">Paramètres de profil</p>
             <div className="w-12 bg-white my-2 mx-1 h-[1px]"></div>
 
-            <form action={updateUser} onSubmit={handleSubmit}>
+            <form action={updateUser} >
                 <Input type="hidden" name="id" value={user?.id}/>
 
                 <Card>
@@ -48,11 +41,13 @@ export default async function PageSettings() {
                             <Input type="email" name="email" id="email" disabled defaultValue={user?.email || ''}/>
                         </div>
                     </CardContent>
+
                     <CardFooter>
                         <Button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white">Modifier</Button>
                     </CardFooter>
                 </Card>
             </form>
+
             <form action="">
                 <Input type="hidden" name="id" value=""/>
                 <Button type="submit" className="bg-red-500 mx-1 my-1 hover:bg-red-600 text-white">Supprimer mon
