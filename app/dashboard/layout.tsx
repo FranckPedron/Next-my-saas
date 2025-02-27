@@ -1,4 +1,5 @@
 import DashboardNav from "../components/DashboardNav";
+import ButtonSignOut from "../components/ButtonSignOut"
 
 export default async function DashboardLayout({children}:Readonly<{children:React.ReactNode}>) {
     return (
@@ -7,6 +8,7 @@ export default async function DashboardLayout({children}:Readonly<{children:Reac
             <DashboardNav />
 
             <div className="w-full h-full">
+                <ButtonSignOut />
                 {children}
             </div>
         </section>
