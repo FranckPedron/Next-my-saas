@@ -5,6 +5,7 @@ CREATE TABLE "User" (
     "email" TEXT,
     "emailVerified" DATETIME,
     "image" TEXT,
+    "stripeCustomerId" TEXT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );
@@ -47,22 +48,22 @@ CREATE TABLE "VerificationToken" (
 );
 
 -- CreateTable
-CREATE TABLE "Authenticator" (
-    "credentialID" TEXT NOT NULL,
+CREATE TABLE "Note" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "title" TEXT,
+    "description" TEXT,
+    "completed" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
     "userId" TEXT NOT NULL,
-    "providerAccountId" TEXT NOT NULL,
-    "credentialPublicKey" TEXT NOT NULL,
-    "counter" INTEGER NOT NULL,
-    "credentialDeviceType" TEXT NOT NULL,
-    "credentialBackedUp" BOOLEAN NOT NULL,
-    "transports" TEXT,
-
-    PRIMARY KEY ("userId", "credentialID"),
-    CONSTRAINT "Authenticator_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT "Note_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_stripeCustomerId_key" ON "User"("stripeCustomerId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Account_provider_providerAccountId_key" ON "Account"("provider", "providerAccountId");
@@ -74,4 +75,4 @@ CREATE UNIQUE INDEX "Session_sessionToken_key" ON "Session"("sessionToken");
 CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Authenticator_credentialID_key" ON "Authenticator"("credentialID");
+CREATE UNIQUE INDEX "Note_id_key" ON "Note"("id");

@@ -4,11 +4,12 @@ import {Input} from "@/components/ui/input";
 import {Textarea} from "@/components/ui/textarea";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
+import {createNote} from "@/lib/actionsNotes";
 
-export default function PageCreate() {
+export default function CreatePage() {
     return (
             <Card>
-                <form>
+                <form action={createNote}>
                     <CardHeader>
                         <CardTitle>Nouvelle note</CardTitle>
                         <CardDescription>Ecrivez votre note ici</CardDescription>
@@ -26,7 +27,7 @@ export default function PageCreate() {
                         </div>
                         <div className="gap-y-2 flex flex-col">
                             <Label htmlFor="completed">En attente | Terminé</Label>
-                            <Input type="checkbox" id="completed" name="completed" required className="w-6 cursor-pointer"></Input>
+                            <Input type="checkbox" id="completed" name="completed" className="w-6 cursor-pointer"></Input>
                         </div>
                     </CardContent>
                     <CardFooter className="flex items-center justify-between">
@@ -37,6 +38,5 @@ export default function PageCreate() {
                     </CardFooter>
                 </form>
             </Card>
-
     )
 }
