@@ -3,6 +3,7 @@
 import {getUser} from "./actionsUsers";
 import { prisma } from "./db";
 import {redirect} from "next/navigation";
+import {revalidatePath} from "next/cache";
 
 export const getAllNotes = async (userId: string) =>{
     const data = await prisma.note.findMany({
@@ -32,4 +33,12 @@ export const createNote = async (formData: FormData) => {
         }
     });
     redirect("/dashboard/notes");
+}
+
+export const deleteNote = async (formData: FormData) => {
+    const id = formData.get("id") as string;
+    await prisma.note.delete({
+        where: {id}
+    });
+    revalidatePath("/");
 }

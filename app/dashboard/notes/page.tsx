@@ -24,7 +24,14 @@ export default async function PageNotes() {
 
             {data.length < 1 ? (
                 <div className="flex flex-col min-h-[400px] items-center justify-center rounded-md border border-dashed p-3">
-
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center bg-orange-500 bg-opacity-20 mb-4">
+                        <File className="text-orange-900"/>
+                    </div>
+                    <p className="text-lg text-white">Vous n'avez aucune note</p>
+                    <p className="text-muted-foreground text-sm">Commencez à créer des notes</p>
+                    <Button className="bg-orange-500 hover:bg-orange-600 text-white mt-4">
+                        <Link href={"/dashboard/notes/create"}>Créer une nouvelle note</Link>
+                    </Button>
                 </div>
             ) : (
                 <div className="flex flex-col space-y-4">
