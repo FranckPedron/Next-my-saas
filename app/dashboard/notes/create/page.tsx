@@ -31,10 +31,10 @@ export default function CreatePage() {
                         </div>
                     </CardContent>
                     <CardFooter className="flex items-center justify-between">
-                        <Button className="bg-red-500 hover:bg-red-600 text-white">
+                        <Button type="button" className="bg-red-500 hover:bg-red-600 text-white">
                             <Link href="/dashboard/notes">Annuler</Link>
                         </Button>
-                        <Button className="bg-orange-500 hover:bg-orange-600 text-white">Créer note</Button>
+                        <Button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white">Créer note</Button>
                     </CardFooter>
                 </form>
             </Card>
