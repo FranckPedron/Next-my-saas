@@ -27,14 +27,14 @@ export default function PagePayment() {
                     <div className="flex-1 flex flex-col justify-between px-6 py-4 bg-secondary rounded-lg m-1 space-t-6 p-3 mt-4">
                         <ul className="space-y-3">
                             {itemsPremium.map((item, index) => (
-                                <li key={index} className="flex items-center space-x-2">
+                                <li key={index} className="flex items-center space-x-2 text-muted-foreground">
                                     <Image src={BadgePremium} alt="Badge premium" width={24} height={24}/>
                                     <span>{item.name}</span>
                                 </li>
                             ))}
                         </ul>
                         <form action="" className="w-full mt-4">
-                            <Button className="bg-orange-500 hover:bg-orange-600 text-white">Devenez membre Premium</Button>
+                            <Button className="bg-orange-500 hover:bg-orange-600 text-white">Devenir membre Premium</Button>
                         </form>
                     </div>
                 </CardContent>
