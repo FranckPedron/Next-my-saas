@@ -12,7 +12,7 @@ export default async function PageSettings() {
         <section className="border border-gray-200 rounded-md p-3">
             <h2 className="text-3xl uppercase font-black">Settings</h2>
             <p className="text-lg text-muted-foreground">Paramètres de profil</p>
-            <div className="w-12 bg-white my-2 mx-1 h-[1px]"></div>
+            <div className="w-12 bg-white my-2 mx-1 h-px"></div>
 
             <form action={updateUser} >
                 <Input type="hidden" name="id" value={user?.id}/>
